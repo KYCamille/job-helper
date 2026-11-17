@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>如何新增內容｜求職小幫手</title>
+  <meta name="page-type" content="guide">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header"><div class="inner">
+  <a class="logo" href="index.html">求職<span>小幫手</span></a>
+  <nav class="nav"><a href="index.html">職缺清單</a><a href="guide.html" aria-current="page">如何新增</a></nav>
+</div></header>
+
+<main>
+  <div class="breadcrumb"><a href="index.html">首頁</a> › 如何新增</div>
+  <h1>如何新增一則職缺</h1>
+  <p>這一頁是 <code>AGENTS.md</code> 的網頁版摘要，給人看；AI 請直接讀 <code>AGENTS.md</code>。</p>
+
+  <section class="card">
+    <h2>三個步驟</h2>
+    <ol>
+      <li>把職缺原文存成 <code>raw/jobs/YYYY-MM-公司-職位.md</code>（例：<code>2026-12-acme-marketing-analyst.md</code>）。</li>
+      <li>對 AI 說：
+        <div class="callout">請先讀 AGENTS.md。我在 raw/jobs/ 放了新職缺 &lt;slug&gt;，請依第 8 節流程完成 ②–⑤，跑完 check.py 把結果貼給我，先不要 commit。</div>
+      </li>
+      <li>看過結果、開新對話做審查，沒問題就 commit、push，網站自動更新。</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>AI 會產出什麼</h2>
+    <div class="table-wrap"><table class="score-table">
+      <thead><tr><th>檔案</th><th>必備區塊</th></tr></thead>
+      <tbody>
+        <tr><td><code>jobs/&lt;slug&gt;.html</code></td><td>職缺摘要、條件拆解、關鍵字、適配度評分、落差與補強、面試準備、資料來源</td></tr>
+        <tr><td><code>resumes/&lt;slug&gt;.html</code><br><small>分數 ≥ 60 才產出</small></td><td>投遞目標、個人摘要、技能、工作經歷、專案、學歷、改了什麼與為什麼</td></tr>
+        <tr><td><code>index.html</code></td><td>在職缺清單最上方新增一張卡片</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="card">
+    <h2>評分表（每一則都用同一把尺）</h2>
+    <div class="table-wrap"><table class="score-table">
+      <thead><tr><th>面向</th><th>配分</th></tr></thead>
+      <tbody>
+        <tr><td>硬技能</td><td class="num">40</td></tr>
+        <tr><td>相關經驗</td><td class="num">30</td></tr>
+        <tr><td>產業／領域</td><td class="num">15</td></tr>
+        <tr><td>軟實力與工作型態</td><td class="num">15</td></tr>
+      </tbody>
+    </table></div>
+    <p><span class="badge badge-high">80–100 高度適合</span> <span class="badge badge-mid">60–79 可以嘗試</span> <span class="badge badge-low">0–59 需要補強</span></p>
+  </section>
+
+  <section class="card">
+    <h2>不能踩的線</h2>
+    <ul>
+      <li><strong>不捏造</strong>：履歷上的每個數字、技能、職稱都要能在 <code>profile/profile.md</code> 找到。</li>
+      <li><strong>不改事實來源</strong>：<code>profile/</code> 與 <code>raw/</code> 只能讀。</li>
+      <li><strong>不放真實個資</strong>：網站是公開的，真實履歷放 <code>private/</code>（不會上傳）。</li>
+      <li><strong>「做完了」由腳本決定</strong>：<code>python3 scripts/check.py</code> 要顯示 <code>ALL CHECKS PASSED</code>。</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>想加新的頁面類型？</h2>
+    <p>例如「求職信」「面試紀錄」。四個地方要一起改：</p>
+    <ol>
+      <li><code>templates/</code> 新增模板</li>
+      <li><code>AGENTS.md</code> 第 4 節加區塊表</li>
+      <li><code>scripts/check.py</code> 的 <code>PAGE_RULES</code> 加檢查</li>
+      <li>這一頁加說明</li>
+    </ol>
+  </section>
+</main>
+
+<footer class="site-footer"><div class="inner">
+  求職小幫手・規則見 AGENTS.md
+</div></footer>
+</body>
+</html>
